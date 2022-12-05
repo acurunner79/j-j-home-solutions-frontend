@@ -1,51 +1,48 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
- */
+import React from 'react'
+import { createGlobalStyle } from 'styled-components'
+import Hamburger from './Nav/Hamburger/HAmburger'
+import Navbar from './Nav/Navbar/Navbar'
 
-import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+const GlobalStyle = createGlobalStyle`
+    *{
+        margin: 0;
+        padding: 0;
+    }
 
-import Header from "./header"
-import "./layout.css"
+    body{
+        width: 100vw;
+        height: 100vh;
+        text-align: center;
+        margin: 0;
+        font-family: 'Helvetica', sans-seriff;
+    }
+
+    a{
+        color: rgb(183, 5, 5);
+        text-decoration: none;
+        list-style: none;
+        font-size: 20px
+    }
+
+    #text{
+        color:rgb(183, 5, 5); 
+    }
+
+    h1, h2, h3, h4, h5, h6, p{
+        color:rgb(183, 5, 5);
+    }
+`
+
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
-    </>
-  )
+    return(
+        <div>
+            <GlobalStyle blackColor/>
+            <Hamburger />
+            <Navbar />
+            <section>{ children }</section>
+        </div>
+    )
 }
 
 export default Layout
